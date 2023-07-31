@@ -108,7 +108,7 @@ const updateEmployeeRole = () => {
 }
 
 const viewAllRoles = () => {
-    db.query(`SELECT * from roles`, (error, results) =>{
+    db.query(`SELECT * from roles`, (error, results) => {
         if (error) {
             console.error(error);
         } else {
@@ -124,11 +124,19 @@ const addRole = () => {
 }
 
 const viewAllDepartment = () => {
-
+    db.query(`SELECT * from department`, (error, results) => {
+        if (error) {
+            console.error(error);
+        } else {
+            console.table(results);
+        }
+        prompt();
+    });
 }
 
 const addDepartment = () => {
 
+    prompt();
 }
 
 
