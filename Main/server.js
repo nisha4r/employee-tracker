@@ -103,9 +103,19 @@ const addEmployee = () => {
 
 const updateEmployeeRole = () => {
 
+    prompt();
+
 }
 
 const viewAllRoles = () => {
+    db.query(`SELECT * from roles`, (error, results) =>{
+        if (error) {
+            console.error(error);
+        } else {
+            console.table(results);
+        }
+        prompt();
+    });
 
 }
 
