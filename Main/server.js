@@ -46,7 +46,33 @@ const prompt = () => {
     }).catch(error => console.error(error));
 }
 
+const viewAllEmployees = () => {
 
+}
+
+const addEmployee = () => {
+
+}
+
+const updateEmployeeRole = () => {
+
+}
+
+const viewAllRoles = () => {
+
+}
+
+const addRole = () => {
+
+}
+
+const viewAllDepartment = () => {
+
+}
+
+const addDepartment = () => {
+
+}
 
 
 prompt();
