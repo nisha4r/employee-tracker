@@ -53,7 +53,7 @@ const prompt = () => {
                 break;
             case "Add Role": addRole();
                 break;
-            case "View All Departments": viewAllDepartment():
+            case "View All Departments": viewAllDepartment();
                 break;
             case "Add Department": addDepartment();
                 break;
@@ -191,7 +191,7 @@ const addDepartment = () => {
             }
         })
     }).catch(error => console.error(error));
- 
+
 }
 
 
