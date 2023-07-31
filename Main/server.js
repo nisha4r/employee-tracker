@@ -84,7 +84,7 @@ const addEmployee = () => {
         name: "lastName"
     }
     ]).then(answer => {
-        db.query(`INSERT INTO employee(first_name, last_name) VALUES(?,?)`, [ans.firstName, ans.lastName], (error, results) => {
+        db.query(`INSERT INTO employee(first_name, last_name) VALUES(?,?)`, [answer.firstName, answer.lastName], (error, results) => {
             if (error) {
                 console.log(error);
             } else {
@@ -168,8 +168,30 @@ const viewAllDepartment = () => {
 }
 
 const addDepartment = () => {
+    inquirer.prompt([{
+        type: "input",
+        message: "What is the name of the department?",
+        name: "department"
+    }
+    ]).then(answer => {
+        db.query(`INSERT INTO department(name) VALUES(?)`, [answer.department], (error, results) => {
+            if (error) {
+                console.log(error);
+            } else {
+                db.query(`SELECT * from department`, (error, results) => {
+                    if (error) {
+                        console.error(error);
 
-    prompt();
+                    } else {
+                        console.table(results);
+
+                    }
+                    prompt();
+                })
+            }
+        })
+    }).catch(error => console.error(error));
+ 
 }
 
 
