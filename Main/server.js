@@ -120,6 +120,31 @@ const viewAllRoles = () => {
 }
 
 const addRole = () => {
+    const deptList = () => db.promise().query(`SELECT * from department`).then((rows) => {
+        const deptNames = rows[0].map(e => e.name);
+        return deptNames;
+    });
+    inquirer.prompt([{
+        type: "input",
+        message: "What is the name of the role ?",
+        name: "role"
+    }, {
+        type: "input",
+        message: "What is the salary of the role ?",
+        name: "salary"
+    }
+        , {
+        type: "list",
+        message: "Which department does the role belong to ?",
+        name: "department",
+        choices: deptList
+    }
+
+    ]).then(answer => {
+        
+    })
+
+
 
 }
 
