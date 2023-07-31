@@ -69,11 +69,36 @@ const viewAllEmployees = () => {
         } else {
             console.table(results);
         }
-    })
+    });
 }
 
 const addEmployee = () => {
+    inquirer.prompt([{
+        type: "input",
+        message: "What is the employee's first name?",
+        name: "firstName"
+    }, {
+        type: "input",
+        message: "What is the employee's last name?",
+        name: "lastName"
+    }
+    ]).then(answer => {
+        db.query(`INSERT INTO employee(first_name, last_name) VALUES(?,?)`, [ans.firstName, ans.lastName], (error, results) => {
+            if (error) {
+                console.log(error);
+            } else {
+                db.query(`SELECT * from employee`, (error, results) => {
+                    if (error) {
+                        console.error(error);
 
+                    } else {
+                        console.table(results);
+                        prompt();
+                    }
+                })
+            }
+        })
+    }).catch(error => console.error(error));
 }
 
 const updateEmployeeRole = () => {
