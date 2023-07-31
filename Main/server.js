@@ -148,6 +148,7 @@ const addRole = () => {
             return deptId[0];
         }).then((deptId) => {
             db.promise().query(`INSERT into roles(title, salary, department_id) VALUES( ?,?,?)`, [answer.role, answer.salary, deptId]);
+            viewAllRoles();
             prompt();
         });
     })
