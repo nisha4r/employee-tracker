@@ -69,6 +69,7 @@ const viewAllEmployees = () => {
         } else {
             console.table(results);
         }
+        prompt();
     });
 }
 
@@ -93,8 +94,9 @@ const addEmployee = () => {
 
                     } else {
                         console.table(results);
-                        prompt();
+
                     }
+                    prompt();
                 })
             }
         })
@@ -141,7 +143,13 @@ const addRole = () => {
     }
 
     ]).then(answer => {
-        
+        db.promoise().query(`SELECT id from department where name = ?`, answer.department).then(ans => {
+            let deptId = ans[0].map(e => e.id);
+            return deptId[0];
+        }).then((deptId) => {
+            db.promoise().query(`INSERT into roles(title, salary, department_id) VALUES( ?,?,?)`, [answer.role, answer.salary, deptId]);
+            prompt();
+        });
     })
 
 
