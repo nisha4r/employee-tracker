@@ -42,12 +42,34 @@ const prompt = () => {
     }
 
     ]).then(answer => {
+        switch (answer.prompt) {
+            case "View All Employees": viewAllEmployees();
+                break;
+            case "Add Employee": addEmployee();
+                break;
+            case "Update Employee Role": updateEmployeeRole();
+                break;
+            case "View All Roles": viewAllRoles();
+                break;
+            case "Add Role": addRole();
+                break;
+            case "View All Departments": viewAllDepartment():
+                break;
+            case "Add Department": addDepartment();
+                break;
+        }
 
     }).catch(error => console.error(error));
 }
 
 const viewAllEmployees = () => {
-
+    db.query(`SELECT * from employee`, (error, results) => {
+        if (error) {
+            console.error(error);
+        } else {
+            console.table(results);
+        }
+    })
 }
 
 const addEmployee = () => {
