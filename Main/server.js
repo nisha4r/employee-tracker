@@ -1,6 +1,8 @@
 //import express
 const express = require('express');
+//import console.table to print in console
 const consoleTable = require('console.table');
+//import inquirer to show the prompt
 const inquirer = require('inquirer');
 
 // Import and require mysql2
@@ -18,12 +20,14 @@ const db = mysql.createConnection(
         host: 'localhost',
         // MySQL username,
         user: 'root',
-        password: 'Lahasya@1218',
+        password: '',
         database: 'employeetracker_db'
     },
     console.log(`Connected to the employeetracker_db database.`)
 );
 
+
+// Prompt message to select the action to execute.
 const prompt = () => {
     inquirer.prompt([{
         type: "list",
@@ -62,6 +66,7 @@ const prompt = () => {
     }).catch(error => console.error(error));
 }
 
+// To view all employees 
 const viewAllEmployees = () => {
     db.query(`SELECT * from employee`, (error, results) => {
         if (error) {
@@ -73,6 +78,7 @@ const viewAllEmployees = () => {
     });
 }
 
+//To Add Employee to the employee table
 const addEmployee = () => {
     inquirer.prompt([{
         type: "input",
@@ -103,6 +109,7 @@ const addEmployee = () => {
     }).catch(error => console.error(error));
 }
 
+// To update employee role on the exisiting employee, input employee id and role id.
 const updateEmployeeRole = () => {
     inquirer.prompt([{
         type: "input",
@@ -143,7 +150,7 @@ const updateEmployeeRole = () => {
     
 
 }
-
+// To view all available roles from roles table.
 const viewAllRoles = () => {
     db.query(`SELECT * from roles`, (error, results) => {
         if (error) {
@@ -156,6 +163,7 @@ const viewAllRoles = () => {
 
 }
 
+//To add new role to the role table, input: role, salary
 const addRole = () => {
     const deptList = () => db.promise().query(`SELECT * from department`).then((rows) => {
         const deptNames = rows[0].map(e => e.name);
@@ -192,6 +200,7 @@ const addRole = () => {
 
 }
 
+//To view All Department from department table
 const viewAllDepartment = () => {
     db.query(`SELECT * from department`, (error, results) => {
         if (error) {
@@ -203,6 +212,7 @@ const viewAllDepartment = () => {
     });
 }
 
+// To add new department
 const addDepartment = () => {
     inquirer.prompt([{
         type: "input",
@@ -230,5 +240,5 @@ const addDepartment = () => {
 
 }
 
-
+//onload call prompt() function
 prompt();
