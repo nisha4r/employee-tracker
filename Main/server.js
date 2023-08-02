@@ -104,8 +104,43 @@ const addEmployee = () => {
 }
 
 const updateEmployeeRole = () => {
+    inquirer.prompt([{
+        type: "input",
+        message: "What is the Employee ID you want to update ?",
+        name: "employeeid",
+        validate: (employeeId) => {
+            if (employeeId) {
+                return true;
+            } else {
+                console.log("Please enter valid employee Id , it cannot be empty or invalid");
+                return false;
+            }
 
-    prompt();
+        }
+    }, {
+        type: "input",
+        message: "What is the role Id  you want to map to an Employee?",
+        name: "roleid",
+        validate: (roleId) => {
+            if (roleId) {
+                return true;
+            } else {
+                console.log("Please enter valid role Id , it cannot be empty or invalid");
+                return false;
+            }
+        }
+    }
+    ]).then((answer) => {
+        db.query(`UPDATE employee SET role_id = ? WHERE id = ?`, [answer.roleid, answer.employeeid], (error, results) => {
+            if (error) {
+                console.error(error);
+            } else {
+                console.table(results);
+            }
+            prompt();
+        });
+    })
+    
 
 }
 
