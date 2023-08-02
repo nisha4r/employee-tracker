@@ -130,7 +130,7 @@ const updateEmployeeRole = () => {
             }
         }
     }
-    ]).then((answer) => {
+    ]).then(answer => {
         db.query(`UPDATE employee SET role_id = ? WHERE id = ?`, [answer.roleid, answer.employeeid], (error, results) => {
             if (error) {
                 console.error(error);
